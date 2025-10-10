@@ -25,3 +25,4 @@ yarn-error.log*
 # Note files
 /customize-cra.md
 /babel-plugin-modules-resolver.md
+/prettier.md
