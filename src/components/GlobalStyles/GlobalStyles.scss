@@ -3,6 +3,9 @@
 
 :root {
     --primary-color: #fe2c55;
+    --black-color: #000;
+    --white-color: #fff;
+    --text-color: #333;
 
     // Default Layout
     --default-layout-header-height: 60px;
@@ -23,6 +26,20 @@ body {
     font-family: 'Oswald', sans-serif;
     font-size: 1.6rem;
     line-height: 1.5;
+    color: var(--text-color);
     // Search thêm để biết về thuộc tính này
     text-rendering: optimizeSpeed;
+}
+
+// Bất cứ thẻ nào có tabindex thì đều sẽ có outline
+button,
+input,
+[tabindex] {
+    outline: none;
+    border: none;
+}
+
+a[href] {
+    color: var(--text-color);
+    text-decoration: none;
 }
