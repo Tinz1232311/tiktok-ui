@@ -4,12 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCircleXmark,
     faSpinner,
-    faMagnifyingGlass,
     faEllipsisVertical,
     faGlobe,
     faCircleQuestion,
     faKeyboard,
-    faCloudUpload,
     faUser,
     faCoins,
     faGear,
@@ -25,6 +23,8 @@ import images from '~/assets/images';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountItem from '~/components/AccountItem';
 import Menu from '~/components/Popper/Menu';
+import { SearchIcon, InboxIcon, MessageIcon, UploadIcon } from '~/components/Icons';
+import Image from '~/components/Images';
 
 const cx = classNames.bind(styles);
 
@@ -136,7 +136,7 @@ function Header() {
 
                         <button className={cx('search-btn')}>
                             {/* Search */}
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
+                            <SearchIcon />
                         </button>
                     </div>
                 </HeadlessTippy>
@@ -144,9 +144,20 @@ function Header() {
                 <div className={cx('actions')}>
                     {currentUser ? (
                         <>
-                            <Tippy delay={[0, 200]} content="Upload video" placement="bottom">
+                            <Tippy delay={[0, 50]} content="Upload video" placement="bottom">
                                 <button className={cx('action-btn')}>
-                                    <FontAwesomeIcon icon={faCloudUpload}></FontAwesomeIcon>
+                                    <UploadIcon />
+                                </button>
+                            </Tippy>
+                            <Tippy delay={[0, 50]} content="Message" placement="bottom">
+                                <button className={cx('action-btn')}>
+                                    <MessageIcon />
+                                </button>
+                            </Tippy>
+                            <Tippy delay={[0, 50]} content="Inbox" placement="bottom">
+                                <button className={cx('action-btn')}>
+                                    <InboxIcon />
+                                    <span className={cx('badge')}>12</span>
                                 </button>
                             </Tippy>
                         </>
@@ -159,10 +170,11 @@ function Header() {
 
                     <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
                         {currentUser ? (
-                            <img
+                            <Image
                                 className={cx('user-avatar')}
                                 src="https://scontent.fdad2-1.fna.fbcdn.net/v/t39.30808-6/481228885_667566122356923_6283810518765110664_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=9K0iAIMYLUEQ7kNvwFKtjiJ&_nc_oc=Adlt19XmvqFv-KQe7qUMvpnNGLMJ5Yz_bWg_ozwOk-uRBsBw1vP2lHTOrMXnDr8ySIv8l2Bze4mWuAtvS9mfGyaY&_nc_zt=23&_nc_ht=scontent.fdad2-1.fna&_nc_gid=Sk1b7S1WWMEep7a5ZuEypA&oh=00_Afc6DYqI897wzFrROxx_O-3gjrPv4UcBgxggqmS3XMYgSA&oe=68F17071"
                                 alt="Nguyen Huu Tin"
+                                // fallback="https://scontent.fdad1-4.fna.fbcdn.net/v/t39.30808-6/481074719_658136436633225_2284147827568182137_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=105&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=5_EOg7ZZxzgQ7kNvwGIz-s3&_nc_oc=AdmoiNnfHPqWVPWLa4-s3micrKHJymzqVYJdSJ_PryfBPBXu4jCg_eOtk1H2IO1fojt44qGLj2nE8zniwzAi_l2R&_nc_zt=23&_nc_ht=scontent.fdad1-4.fna&_nc_gid=Wt2ekFCVOYp49FWqMOIb0A&oh=00_AfdDY4Vidt6YLYAJ32CZJYkq_WYUbb2ms6_4rjRcUat4Gw&oe=68F15C40"
                             />
                         ) : (
                             <button className={cx('more-btn')}>
