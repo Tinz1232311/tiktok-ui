@@ -14,6 +14,7 @@
 .inner {
     width: var(--default-layout-width);
     height: 100%;
+    padding: 0 var(--default-layout-horizontal-spacer);
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -42,6 +43,7 @@
         background-color: transparent;
         // Màu của dấu nháy gõ text
         caret-color: var(--primary-color);
+        font-weight: 300;
     }
 
     input:not(:placeholder-shown) ~ .search-btn {
@@ -108,9 +110,9 @@
 }
 
 .more-btn {
+    cursor: pointer;
     font-size: 2rem;
     margin-left: 24px;
     padding: 4px 8px;
     background-color: transparent;
 }
-
