@@ -26,3 +26,4 @@ yarn-error.log*
 /customize-cra.md
 /babel-plugin-modules-resolver.md
 /prettier.md
+/api-url.md

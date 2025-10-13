@@ -11,6 +11,10 @@ root.render(
             <App />
         </GlobalStyles>
     </React.StrictMode>,
+
+    // <GlobalStyles>
+    //     <App />
+    // </GlobalStyles>,
 );
 
 // If you want to start measuring performance in your app, pass a function
