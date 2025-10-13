@@ -1,7 +1,7 @@
-import routesConfig from '~/config/routes';
+import config from '~/config';
 
 // Layouts
-import { HeaderOnly } from '~/components/Layout';
+import { HeaderOnly } from '~/layouts';
 
 import HomePage from '~/pages/Home';
 import FollowingPage from '~/pages/Following';
@@ -12,24 +12,24 @@ import SearchPage from '~/pages/Search';
 // Các routes không đăng nhập vẫn vào được
 const publicRoutes = [
     {
-        path: routesConfig.home,
+        path: config.routes.home,
         component: HomePage,
     },
     {
-        path: routesConfig.following,
+        path: config.routes.following,
         component: FollowingPage,
     },
     {
-        path: routesConfig.profile,
+        path: config.routes.profile,
         component: ProfilePage,
     },
     {
-        path: routesConfig.upload,
+        path: config.routes.upload,
         component: UploadPage,
         layout: HeaderOnly,
     },
     {
-        path: routesConfig.search,
+        path: config.routes.search,
         component: SearchPage,
         layout: null,
     },
