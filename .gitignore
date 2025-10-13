@@ -27,3 +27,4 @@ yarn-error.log*
 /babel-plugin-modules-resolver.md
 /prettier.md
 /api-url.md
+/debounce.md

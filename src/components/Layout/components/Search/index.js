@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import { useDebounce } from '~/hooks';
 import { faCircleXmark, faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,10 +17,19 @@ function Search() {
     const [showResult, setShowResult] = useState(true);
     const [loading, setLoading] = useState(false);
 
+    // Sau 500ms thì mới update (set lại giá trị tìm kiếm)
+
+    // Lưu ý cho dù có gọi custom hook useDebounce bao nhiêu lần
+    // thì initState vẫn là chuỗi rỗng. Phải sau một khoảng setTimeout
+    // 500ms nếu ta không tiếp tục gõ (set lại state và tiếp tục gọi useDebounced
+    //  -> clear Timeout id trước đó -> chưa set lại state) thì giá trị của debounced
+    // lúc này mới được cập nhật lại
+    const debounced = useDebounce(searchValue, 500);
+
     const inputRef = useRef();
 
     useEffect(() => {
-        if (!searchValue.trim()) {
+        if (!debounced.trim()) {
             setSearchResult([]);
             return;
         }
@@ -27,7 +37,7 @@ function Search() {
         setLoading(true);
 
         // fecth api
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
+        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
             .then((res) => {
                 return res.json();
             })
@@ -39,7 +49,7 @@ function Search() {
                 setLoading(false);
                 throw e;
             });
-    }, [searchValue]);
+    }, [debounced]);
 
     const handleClear = () => {
         setSearchValue('');
