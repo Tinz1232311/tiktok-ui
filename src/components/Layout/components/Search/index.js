@@ -1,8 +1,10 @@
 import { useEffect, useState, useRef } from 'react';
-import { useDebounce } from '~/hooks';
 import { faCircleXmark, faCircleNotch } from '@fortawesome/free-solid-svg-icons';
-import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames/bind';
+
+import * as searchServices from '~/apiServices/searchServices';
+import { useDebounce } from '~/hooks';
 import HeadlessTippy from '@tippyjs/react/headless';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountItem from '~/components/AccountItem';
@@ -36,19 +38,15 @@ function Search() {
 
         setLoading(true);
 
-        // fecth api
-        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounced)}&type=less`)
-            .then((res) => {
-                return res.json();
-            })
-            .then((res) => {
-                setSearchResult(res.data);
-                setLoading(false);
-            })
-            .catch((e) => {
-                setLoading(false);
-                throw e;
-            });
+        const fecthApi = async () => {
+            setLoading(true);
+
+            const res = await searchServices.search(debounced);
+            setSearchResult(res.data);
+            setLoading(false);
+        };
+
+        fecthApi();
     }, [debounced]);
 
     const handleClear = () => {
