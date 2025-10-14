@@ -16,7 +16,7 @@ const cx = classNames.bind(styles);
 function Search() {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
-    const [showResult, setShowResult] = useState(true);
+    const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
 
     // Sau 500ms thì mới update (set lại giá trị tìm kiếm)
@@ -24,14 +24,14 @@ function Search() {
     // Lưu ý cho dù có gọi custom hook useDebounce bao nhiêu lần
     // thì initState vẫn là chuỗi rỗng. Phải sau một khoảng setTimeout
     // 500ms nếu ta không tiếp tục gõ (set lại state và tiếp tục gọi useDebounced
-    //  -> clear Timeout id trước đó -> chưa set lại state) thì giá trị của debounced
+    //  -> clear Timeout id trước đó -> chưa set lại state) thì giá trị của debouncedValue
     // lúc này mới được cập nhật lại
-    const debounced = useDebounce(searchValue, 500);
+    const debouncedValue = useDebounce(searchValue, 500);
 
     const inputRef = useRef();
 
     useEffect(() => {
-        if (!debounced.trim()) {
+        if (!debouncedValue.trim()) {
             setSearchResult([]);
             return;
         }
@@ -41,13 +41,13 @@ function Search() {
         const fecthApi = async () => {
             setLoading(true);
 
-            const res = await searchServices.search(debounced);
+            const res = await searchServices.search(debouncedValue);
             setSearchResult(res.data);
             setLoading(false);
         };
 
         fecthApi();
-    }, [debounced]);
+    }, [debouncedValue]);
 
     const handleClear = () => {
         setSearchValue('');
