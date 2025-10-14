@@ -8,6 +8,7 @@ import FollowingPage from '~/pages/Following';
 import ProfilePage from '~/pages/Profile';
 import UploadPage from '~/pages/Upload';
 import SearchPage from '~/pages/Search';
+import LivePage from '~/pages/Live'
 
 // Các routes không đăng nhập vẫn vào được
 const publicRoutes = [
@@ -32,6 +33,10 @@ const publicRoutes = [
         path: config.routes.search,
         component: SearchPage,
         layout: null,
+    },
+    {
+        path: config.routes.live,
+        component: LivePage,
     },
 ];
 
