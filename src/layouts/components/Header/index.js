@@ -101,6 +101,10 @@ function Header() {
                     <img src={images.logo} alt="Tiktok logo"></img>
                 </Link>
 
+                {/* Prop types không cho phép truyền function */}
+                {/* <Button text>{() => {}}</Button> */}
+                {/* <Button>Click me!</Button> */}
+
                 <Search />
 
                 <div className={cx('actions')}>
